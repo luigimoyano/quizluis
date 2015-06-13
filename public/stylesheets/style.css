@@ -9,3 +9,10 @@ section > div        { padding: 20px; }
 header, nav, section { background: #eee; text-align: center;}
 footer               { background: #eee; text-align: center;}
 nav span             { margin: 0px 10px 0px 0px;}
+
+.author-photo {
+  display: block;
+  width: 125px;
+  /* height: 68px; */
+  margin: 20px auto 0 auto;
+}
