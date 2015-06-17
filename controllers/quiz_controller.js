@@ -45,5 +45,5 @@ exports.answer = function(req,res){
 
     var rightAnswer = req.quiz.respuesta;
     var resultResponse = rightAnswer === req.query.respuesta?'Correcto':'Incorrecto';
-    res.render('quizes/answer', {respuesta:resultResponse,quiz:quiz});  
+    res.render('quizes/answer', {respuesta:resultResponse,quiz:req.quiz});  
 }
