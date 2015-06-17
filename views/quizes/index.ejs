@@ -1,0 +1,12 @@
+
+<p> Lista preguntas </p>
+<table>
+    <td>
+           
+   <% for (var i in quizzes){ %>
+        <tr>
+            <p><a href="/quizes/<%=quizzes[i].id%>"> <%=quizzes[i].pregunta %> </a></p>
+        </tr>
+    <% } %>
+    </td>
+</table>
