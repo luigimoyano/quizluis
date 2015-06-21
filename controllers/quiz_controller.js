@@ -1,5 +1,7 @@
 var models = require('../models/models.js');
 
+var temas = ["otro","humanidades","ocio","ciencia","tecnologia"];
+
 exports.load = function(req,res,next,quizId){
     models.Quiz.find(quizId).then(
         function(quiz){
@@ -44,46 +46,50 @@ exports.show = function(req,res){
 exports.new = function(req,res){
 
     var quiz = models.Quiz.build(
-        {pregunta:"",respuesta:""}
+        {pregunta:"",respuesta:"",tema:""}
     );
 
-    res.render('quizes/new',{quiz:quiz});
+    res.render('quizes/new',{quiz:quiz,temas:temas});
 }
 
 exports.create = function(req,res){
 
     var quiz = models.Quiz.build(req.body.quiz);
-    console.log(req.body);
 
-    /*if(err){
-        res.render('quizes.new',{quiz:quiz,errors:err.errors});
-    }
-    else{*/
-        quiz.save({fields:["pregunta","respuesta"]}).then(function(){
-            res.redirect("/quizes");
-        });
-    //}
-
-    /*quiz.validate().then(function(err){
-        
-    });*/
+    quiz.validate().then(function(err){
+        if(err){
+            res.render('quizes/new',{quiz:quiz, temas:temas, errors:err.errors});
+        }
+        else{
+            quiz.save({fields:["pregunta","respuesta","tema"]}).then(function(){
+                res.redirect("/quizes");
+            });
+        }
+    });
 }
 
 exports.edit = function(req,res){
 
     var quiz = req.quiz;
-    res.render('quizes/edit',{quiz:quiz});
+    res.render('quizes/edit',{quiz:quiz, temas:temas});
 }
 
 exports.update = function(req,res){
 
     req.quiz.pregunta = req.body.quiz.pregunta;
     req.quiz.respuesta = req.body.quiz.respuesta;
-    
-    // TODO: FAlta validar.
-    req.quiz.save({fields:["pregunta","respuesta"]}).then(function(){
-        res.redirect("/quizes");
-    });
+    req.quiz.tema = req.body.quiz.tema;
+
+    req.quiz.validate().then(function(err){
+        if (err){
+            res.render('quizes/edit',{quiz:quiz, temas:temas, errors:err.errors});
+        }
+        else{
+            req.quiz.save({fields:["pregunta","respuesta","tema"]}).then(function(){
+                res.redirect("/quizes");
+            });
+        }
+    }); 
 }
 
 exports.destroy = function(req,res){

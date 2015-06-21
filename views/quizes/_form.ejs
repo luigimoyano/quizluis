@@ -7,6 +7,19 @@
 	<input type="text" name="quiz[respuesta]" placeholder="Respuesta" value="<%=quiz.respuesta%>"/>
 </p>
 <p>
+	<label for="preg" class="rem">Tema</label>
+	<% //quiz['tema'] = "humanidades"; 
+	%>
+	<%= quiz['tema']%>
+
+	<select name="quiz[tema]">
+
+	  <% for (var i in temas ){%>
+	  		<option value="<%=temas[i] %>" <%=temas[i] === quiz['tema']?"selected":"" %> > <%=temas[i] %></option>
+	  <% } %>
+	</select>
+</p>
+<p>
 <input type="submit" value="Enviar">
 <a href="/quizes"><button type="button">Cancelar</button></a>
 </p>
