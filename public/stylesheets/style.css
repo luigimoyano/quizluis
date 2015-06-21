@@ -16,3 +16,11 @@ nav span             { margin: 0px 10px 0px 0px;}
   /* height: 68px; */
   margin: 20px auto 0 auto;
 }
+
+#ErrorMsgs span{
+	color:red;
+}
+
+table {
+  margin: 0 auto 0 auto;
+}

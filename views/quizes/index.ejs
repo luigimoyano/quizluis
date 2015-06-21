@@ -6,14 +6,30 @@
     <input type="submit" value="Enviar">
 </form>
 
+
+<a href="/quizes/new"><h1>Crear pregunta</h1></a>
+
 <p> Lista preguntas </p>
 <table>
-    <td>
-           
-   <% for (var i in quizzes){ %>
-        <tr>
-            <p><a href="/quizes/<%=quizzes[i].id%>"> <%=quizzes[i].pregunta %> </a></p>
-        </tr>
+    <thead>
+
+    </thead>
+    <tbody>
+        <% for (var i in quizzes){ %>
+            <tr>
+                <td>
+                    <a href="/quizes/<%=quizzes[i].id%>"> <%=quizzes[i].pregunta %> </a>
+                </td>
+                <td>
+                    <a href="/quizes/<%=quizzes[i].id%>/edit"> Editar </a>
+                </td>
+                <td>
+                    <form method="post" action="/quizes/<%=quizzes[i].id%>?_method=delete">        
+                        <input type="submit" value="Borrar" onClick="return confirm('Borrar:<%=quizzes[i].pregunta %>');">
+                    </form>
+                </td>
+            </tr>
+   
     <% } %>
-    </td>
+    </tbody>
 </table>
