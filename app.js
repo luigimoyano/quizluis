@@ -41,7 +41,21 @@ app.use(function(req, res, next) {
 
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
-  next();
+
+    var now = new Date().getTime();
+    console.log("Tiempo de login " + req.session.timeLogin);
+
+    console.log("Tiempo pasado desde la ultima peticion " + ((now - req.session.timeLogin)/1000));
+
+    if (now > req.session.timeLogin + (60 * 2 * 1000)){
+       console.log("Borrando sesion");
+       delete req.session.user;
+    }
+    else{
+        console.log("Actualizando sesion");
+        req.session.timeLogin = new Date().getTime();
+    }
+    next();
 });
 
 app.use('/', routes);

@@ -10,6 +10,20 @@ exports.loginRequired = function(req,res,next){
     }
 };
 
+/*exports.checkTimeLogged = function(req,res,next){
+
+    var now = new Date().getTime();
+
+    if (now > req.session.timeLogin + (60 * 2)){
+       delete req.session.user;
+    }
+    else{
+        req.session.timeLogin = new Date().getTime();
+    }
+    next();
+};*/
+
+
 exports.new = function(req,res){
 
     var errors = req.session.errors || {};
@@ -33,8 +47,8 @@ exports.create = function(req,res){
         }
 
         // Crear req.session.user y guardar campos id y username
-
         req.session.user = {id:user.id, username:user.username};
+        req.session.timeLogin = new Date().getTime();
         res.redirect(req.session.redir.toString());
 
     });
