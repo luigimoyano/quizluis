@@ -24,3 +24,7 @@ nav span             { margin: 0px 10px 0px 0px;}
 table {
   margin: 0 auto 0 auto;
 }
+
+.right{
+	float:right;
+}
